@@ -46,7 +46,7 @@ func main() {
         os.Exit(0)
     }
 
-    result, err := client.Invoke(&lambda.InvokeInput{FunctionName: aws.String("message"),
+    result, err := client.Invoke(&lambda.InvokeInput{FunctionName: aws.String("pingStrava"),
                                                      Payload: payload})
     if err != nil {
         fmt.Println("Error calling message")
@@ -59,24 +59,6 @@ func main() {
         os.Exit(0)
     }
 
-    if response.StatusCode != 200 {
-        fmt.Println("Error response code:", response.StatusCode)
-        os.Exit(0)
-    }
-
-    // If the result is failure, we got an error
-    if response.Body.Result == "failure" {
-        fmt.Println("Failed to get items")
-        os.Exit(0)
-    }
-
-    // Print out items
-    if len(resp.Body.Data) > 0 {
-        for i := range resp.Body.Data {
-            fmt.Println(resp.Body.Data[i].Item)
-        }
-    } else {
-        fmt.Println("There were no items")
-    }
+    fmt.Println(response)
 }
 
